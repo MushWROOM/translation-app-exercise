@@ -1,10 +1,11 @@
 import React from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
+
 import {ReactComponent as SearchIcon} from '../../../../assets/icons/search.svg';
 import {TextField} from '../../../../components/TextField/TextField';
 import {inputBackgroundColor} from '../../../../styles/colors';
-import useDynamicTranslation from "../../../../hooks/translation/useDynamicTranslation";
+import withTranslationNamespace from "../../../../components/withTranslationNamespace";
 
 const FilterFieldContainer = styled.div`
   display: flex;
@@ -36,8 +37,7 @@ const StyledSearchIcon = styled(SearchIcon)`
   }
 `;
 
-export default function ResourcesFilter({onChange, value}) {
-  const {t} = useDynamicTranslation('ResourcesFilter')
+function ResourcesFilter({onChange, value, t}) {
     return (
         <FilterFieldContainer>
             <StyledTextField {...{
@@ -54,5 +54,8 @@ export default function ResourcesFilter({onChange, value}) {
 
 ResourcesFilter.propTypes = {
     onChange: PropTypes.func,
-    value: PropTypes.string
+    value: PropTypes.string,
+    t: PropTypes.func
 };
+
+export default withTranslationNamespace(ResourcesFilter)
