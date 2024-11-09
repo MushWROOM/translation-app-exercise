@@ -13,8 +13,8 @@
     "styled-components": "6.1.12"
   },
   "scripts": {
-    "prestart": "node locales-preprocessing.js && node generateNamespaces.js",
-    "prebuild": "node locales-preprocessing.js && node generateNamespaces.js",
+    "prestart": "node locales-preprocessing.js",
+    "prebuild": "node locales-preprocessing.js",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
@@ -25,5 +25,8 @@
     "not dead",
     "not ie <= 11",
     "not op_mini all"
-  ]
+  ],
+  "devDependencies": {
+    "babel-plugin-macros": "^3.1.0"
+  }
 }

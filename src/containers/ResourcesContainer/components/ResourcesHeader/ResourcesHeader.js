@@ -1,16 +1,20 @@
 import React from 'react';
 import styled from 'styled-components';
-import PropTypes from "prop-types";
+import {useTranslation} from "react-i18next";
 
 import {HeaderText, SubHeaderText} from '../../../../styles/commonStyles';
-import withTranslationNamespace from "../../../../components/withTranslationNamespace";
+import resolveNamespace from "../../../../../localizationMacro.macro";
 
 const ResourceHeaderText = styled(HeaderText)`
     color: #686868;
     margin-bottom: 3px;
 `;
 
-function ResourcesHeader({t}) {
+function ResourcesHeader() {
+    const namespace = resolveNamespace;
+    const { t } = useTranslation(namespace);
+
+
     return (
         <>
             <ResourceHeaderText>{t('TITLE')}</ResourceHeaderText>
@@ -19,9 +23,6 @@ function ResourcesHeader({t}) {
     );
 }
 
-ResourcesHeader.propTypes = {
-    t: PropTypes.func
-};
 
 
-export default withTranslationNamespace(ResourcesHeader)
+export default ResourcesHeader

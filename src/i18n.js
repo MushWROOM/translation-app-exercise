@@ -1,7 +1,6 @@
 import i18n from "i18next";
 import HttpBackend from "i18next-http-backend/cjs";
 import {initReactI18next} from "react-i18next";
-import namespaceList from './namespaceList.json';
 
 const savedLanguage = localStorage.getItem('language') || 'en-US';
 
@@ -23,14 +22,5 @@ i18n
         },
         load: 'currentOnly'
     });
-
-i18n.on('loaded', () => {
-    Object.values(namespaceList).forEach((namespace) => {
-        if (!i18n.hasResourceBundle(i18n.language, namespace)) {
-            i18n.loadNamespaces(namespace);
-        }
-
-})});
-
 
 export default i18n;

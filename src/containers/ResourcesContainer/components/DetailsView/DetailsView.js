@@ -1,12 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
+import {useTranslation} from "react-i18next";
 
 import DetailsHeader from './components/DetailsHeader/DetailsHeader';
 import SectionHeader from './components/SectionHeader/SectionHeader';
 import {TextField} from '../../../../components/TextField/TextField';
 import {VerticalContainer} from '../../../../styles/commonStyles';
-import withTranslationNamespace from "../../../../components/withTranslationNamespace";
+import resolveNamespace from "../../../../../localizationMacro.macro";
 
 const WidgetContainer = styled(VerticalContainer)`
   min-height: 100%;
@@ -30,7 +31,9 @@ const FieldsContainer = styled.div`
     margin-top: 6px;
 `;
 
-function DetailsView({resource, t}) {
+function DetailsView({resource}) {
+    const namespace = resolveNamespace;
+    const { t} = useTranslation(namespace);
 
     const {name, description, resourceType, path} = resource;
 
@@ -71,8 +74,7 @@ function DetailsView({resource, t}) {
 }
 
 DetailsView.propTypes = {
-    resource: PropTypes.object,
-    t: PropTypes.func
+    resource: PropTypes.object
 };
 
-export default withTranslationNamespace(DetailsView)
+export default DetailsView

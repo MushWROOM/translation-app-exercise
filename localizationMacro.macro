@@ -1,0 +1,23 @@
+const { createMacro } = require('babel-plugin-macros');
+const path = require('path');
+
+function localizationMacro({ references, state, babel }) {
+    const { types: t } = babel;
+
+    references.default.forEach(referencePath => {
+        const filename = state.file.opts.filename || '';
+
+
+        const folderPath = path.dirname(filename);
+
+
+        const namespace = folderPath
+            .replace(/^.*\/src\//, '')
+            .replace(/\//g, '_');
+
+
+        referencePath.replaceWith(t.stringLiteral(namespace));
+    });
+}
+
+module.exports = createMacro(localizationMacro);

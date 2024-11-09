@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import {HeaderText} from '../../../../../../styles/commonStyles';
+import {HeaderText} from '../../../../../../styles/commonStyles.js';
 
 const SectionHeaderContainer = styled.div`
   margin-bottom: 10px;

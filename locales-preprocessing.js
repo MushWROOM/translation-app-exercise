@@ -5,9 +5,18 @@ const glob = require('glob');
 const srcDir = path.join(__dirname, 'src');
 const destDir = path.join(__dirname, 'public/locales');
 
+function generateNamespace(filePath) {
+    const folderPath = path.dirname(filePath);
+    
+    const namespace = folderPath
+        .replace(/^.*\/src\//, '')
+        .replace(/\/locales.*/, '')
+        .replace(/\//g, '_');
+
+    return namespace;
+}
 
 function copyLocales() {
-
     if (!fs.existsSync(destDir)) {
         fs.mkdirSync(destDir, { recursive: true });
     }
@@ -20,11 +29,10 @@ function copyLocales() {
 
         files.forEach(file => {
             const relativePath = path.relative(srcDir, file);
-            const pathParts = relativePath.split(path.sep);
+            const namespace = generateNamespace(relativePath);
 
-            const lngIndex = pathParts.indexOf('locales') + 1;
-            const lng = pathParts[lngIndex];
-            const namespace = pathParts[lngIndex - 2];
+            const lngIndex = relativePath.split(path.sep).indexOf('locales') + 1;
+            const lng = relativePath.split(path.sep)[lngIndex];
 
             const destLangDir = path.join(destDir, lng, namespace);
             if (!fs.existsSync(destLangDir)) {
@@ -37,6 +45,5 @@ function copyLocales() {
         });
     });
 }
-
 
 copyLocales();
